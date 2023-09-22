@@ -18,12 +18,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { environment } from '../environments/environment';
+import { LogoComponent } from './components/logo/logo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     OnboardingComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
