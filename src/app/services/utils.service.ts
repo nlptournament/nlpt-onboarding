@@ -7,7 +7,11 @@ export class UtilsService {
 
   constructor() { }
 
-  public ip_int_to_str(ip: number): string {
+  public ip_int_to_str(ip: number|null|undefined): string {
+    if (!ip) {
+      return "";
+    }
+
     let result: string = "";
     let hex = ip.toString(16);
     if (hex.length < 8) hex = '0' + hex;

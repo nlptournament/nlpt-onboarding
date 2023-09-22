@@ -4,19 +4,19 @@
 
 <p-card styleClass="p-card-shadow" *ngIf="onboarding && onboarding.ip">
     <div class="ip_display">
-        <div class="ip_header" *ngIf="!onboarding.done">
+        <div class="ip_header" *ngIf="!onboarding?.done">
             <ng-container i18n="@@onboardingIpHeader">Your IP is</ng-container>:
         </div>
-        <div class="ip_header" *ngIf="onboarding.done">
+        <div class="ip_header" *ngIf="onboarding?.done">
             <ng-container i18n="@@onboardingIpHeaderUpcoming">Your IP is going to be</ng-container>:
         </div>
         <div class="ip_ip">
-            {{ utils.ip_int_to_str(onboarding.ip) }}
+            {{ utils.ip_int_to_str(onboarding?.ip) }}
         </div>
-        <div *ngIf="onboarding.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo">
+        <div *ngIf="onboarding?.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo">
             Your onboarding is completed! It now takes up to two minutes till your PC assigns it's final IP. Refresh this page to test if the assignment is done.
         </div>
-        <div *ngIf="onboarding.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo2">
+        <div *ngIf="onboarding?.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo2">
             If you don't like to wait that long, you can open Windows-Commandprompt (Win+R) and type 'ipconfig /renew' this should assign your play-IP immediately.
         </div>
     </div>
@@ -26,7 +26,7 @@
 <p-card i18n-subheader header="Onboarding" subheader="please fill out this form" styleClass="p-card-shadow" *ngIf="onboarding && onboarding.tables">
     <div class="field">
         <span class="p-float-label">
-            <p-dropdown id="selTable" [options]="onboarding.tables" [(ngModel)]="selectedTable" appendTo="body"></p-dropdown>
+            <p-dropdown id="selTable" [options]="onboarding?.tables ?? []" [(ngModel)]="selectedTable" appendTo="body"></p-dropdown>
             <label for="selTable" i18n="@@onboardingFieldLabelTable">Table Number</label>
         </span>
     </div>
@@ -56,7 +56,7 @@
             <ng-container i18n="@@onboardingWhoQuestion">Are you</ng-container>:
         </div>
         <div class="who_name">
-            {{ onboarding.participant }}
+            {{ onboarding?.participant }}
         </div>
     </div>
 

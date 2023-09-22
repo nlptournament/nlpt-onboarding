@@ -1,6 +1,5 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Login } from 'src/app/interfaces/login';
 import { Onboarding } from 'src/app/interfaces/onboarding';
 
 @Component({

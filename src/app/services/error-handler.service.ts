@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +8,6 @@ export class ErrorHandlerService {
   public errorStatus: number = 0;
   public elementError: boolean = false;
   public elementErrors: any;
-
-  constructor(private router: Router) { }
 
   public handleError = (error: HttpErrorResponse) => {
     if (error.status === 401) {
@@ -23,7 +20,6 @@ export class ErrorHandlerService {
 
   private handle401Error = (error: HttpErrorResponse) => {
     this.createErrorMessage(error);
-    this.router.navigate(['/login']);
   }
 
   private handleOtherError = (error: HttpErrorResponse) => {
