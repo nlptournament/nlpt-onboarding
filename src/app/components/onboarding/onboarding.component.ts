@@ -36,6 +36,9 @@ export class OnboardingComponent implements OnInit {
         next: (onboarding: Onboarding) => {
           this.onboarding = onboarding;
           this.onboardingChangeEvent.emit(this.onboarding);
+          if (onboarding?.tables) {
+            this.selectedTable = onboarding.tables[0];
+          }
         },
         error: (err: HttpErrorResponse) => {
           this.errorHandler.handleError(err);

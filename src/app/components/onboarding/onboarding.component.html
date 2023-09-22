@@ -23,10 +23,10 @@
 </p-card>
 
 
-<p-card i18n-subheader header="Onboarding" subheader="please fill out this form" styleClass="p-card-shadow" *ngIf="onboarding && onboarding.tables">
+<p-card i18n-subheader header="Onboarding" subheader="please fill out this form" styleClass="p-card-shadow" *ngIf="selectedTable">
     <div class="field">
         <span class="p-float-label">
-            <p-dropdown id="selTable" [options]="onboarding?.tables ?? []" [(ngModel)]="selectedTable" appendTo="body"></p-dropdown>
+            {{selectedTable}}
             <label for="selTable" i18n="@@onboardingFieldLabelTable">Table Number</label>
         </span>
     </div>
