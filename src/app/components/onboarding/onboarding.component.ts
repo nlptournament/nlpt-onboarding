@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Message } from 'primeng/api';
 import { Onboarding } from 'src/app/interfaces/onboarding';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { UtilsService } from 'src/app/services/utils.service';
@@ -9,12 +8,10 @@ import { OnboardingService } from '../../services/onboarding.service';
 @Component({
   selector: 'app-onboarding',
   templateUrl: './onboarding.component.html',
-  styleUrls: ['./onboarding.component.scss']
 })
 export class OnboardingComponent implements OnInit {
-  @Output() onboardingChangeEvent = new EventEmitter<Onboarding | undefined>;
   onboarding?: Onboarding;
-  errorMsg: Message[] = [];
+  errorMsg: string[] = [];
   selectedTable: number | undefined;
   selectedSeat: number | undefined;
   selectedPw: string | undefined;
@@ -35,7 +32,6 @@ export class OnboardingComponent implements OnInit {
       .subscribe({
         next: (onboarding: Onboarding) => {
           this.onboarding = onboarding;
-          this.onboardingChangeEvent.emit(this.onboarding);
           if (onboarding?.tables) {
             this.selectedTable = onboarding.tables[0];
           }
@@ -55,7 +51,6 @@ export class OnboardingComponent implements OnInit {
         .subscribe({
           next: (onboarding: Onboarding) => {
             this.onboarding = onboarding;
-            this.onboardingChangeEvent.emit(this.onboarding);
           },
           error: (err: HttpErrorResponse) => {
             this.errorHandler.handleError(err);
@@ -72,11 +67,9 @@ export class OnboardingComponent implements OnInit {
       .subscribe({
         next: (onboarding: Onboarding) => {
           this.onboarding = onboarding;
-          this.onboardingChangeEvent.emit(this.onboarding);
         },
         error: (err: HttpErrorResponse) => {
           this.onboarding = undefined;
-          this.onboardingChangeEvent.emit(this.onboarding);
           this.errorHandler.handleError(err);
           if (this.errorHandler.elementError) this.translateErrorCode(this.errorHandler.elementErrors);
         }
@@ -98,7 +91,7 @@ export class OnboardingComponent implements OnInit {
 
     if (msg === "") msg = $localize `:@@OnboardingErrorCodeFallback:Unknown error. Please contact an admin.`;
     this.errorMsg = [
-      { severity: 'error', summary: 'Error', detail: msg }
+      msg
     ];
   }
 
@@ -110,5 +103,11 @@ export class OnboardingComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  get allSeatParametersGiven(): boolean {
+    return this.selectedTable != undefined && this.selectedTable > 0
+      && this.selectedPw != undefined && this.selectedPw.length > 0
+      && this.selectedSeat != undefined && this.selectedSeat > 0;
   }
 }

@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { DropdownModule } from 'primeng/dropdown';
-import { MessagesModule } from 'primeng/messages';
-
-import { ConfirmationService } from 'primeng/api';
-import { MessageService } from 'primeng/api';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,9 +8,12 @@ import { OnboardingComponent } from './components/onboarding/onboarding.componen
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputTextModule } from 'primeng/inputtext';
 import { environment } from '../environments/environment';
 import { LogoComponent } from './components/logo/logo.component';
+import { CardComponent } from './components/theme/card.component';
+import { HeadlineSectionComponent } from './components/theme/headline.section.component';
+import { InputComponent } from './components/theme/input.component';
+import { ButtonComponent } from './components/theme/button.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +21,10 @@ import { LogoComponent } from './components/logo/logo.component';
     WelcomeComponent,
     OnboardingComponent,
     LogoComponent,
+    CardComponent,
+    HeadlineSectionComponent,
+    InputComponent,
+    ButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,18 +32,9 @@ import { LogoComponent } from './components/logo/logo.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
 
-    MessagesModule,
-    CardModule,
-    ButtonModule,
-    InputNumberModule,
-    DropdownModule,
-    InputTextModule,
     environment.services,
-  ],
-  providers: [
-    ConfirmationService,
-    MessageService
   ],
   bootstrap: [AppComponent]
 })

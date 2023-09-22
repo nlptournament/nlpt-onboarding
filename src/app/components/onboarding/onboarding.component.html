@@ -1,20 +1,37 @@
-<app-logo></app-logo>
+<app-logo class="block mb-10"></app-logo>
 
-<div class="card">
-    <p-messages [(value)]="errorMsg" [enableService]="false" [closable]="false"></p-messages>
+<app-headline-section>
+  <h1 class="text-6xl font-highlight">
+    Onboarding
+  </h1>
+</app-headline-section>
+
+<div *ngIf="errorMsg.length" class="card mb-10">
+  <div *ngFor="let errorMessage of errorMsg">
+    <div class="text-lg text-red-600">{{errorMessage}}</div>
+  </div>
 </div>
 
-<p-card styleClass="p-card-shadow" *ngIf="onboarding && onboarding.ip">
+
+<app-card *ngIf="assignedIp">
     <div class="ip_display">
-        <div class="ip_header" *ngIf="!onboarding?.done">
+        <div class="text-2xl text-center" *ngIf="!onboarding?.done">
             <ng-container i18n="@@onboardingIpHeader">Your IP is</ng-container>:
         </div>
-        <div class="ip_header" *ngIf="onboarding?.done">
+        <div class="text-2xl text-center" *ngIf="onboarding?.done">
             <ng-container i18n="@@onboardingIpHeaderUpcoming">Your IP is going to be</ng-container>:
         </div>
-        <div class="ip_ip">
+        <div class="text-4xl font-bold text-center">
             {{ assignedIp }}
         </div>
+        <p class="text-lg text-center">
+          <span i18n="@@onboardingFieldLabelTable">Table Number</span>:
+          {{selectedTable}}
+        </p>
+        <p class="text-lg text-center" *ngIf="onboarding?.participant">
+          <span i18n="@@onboardingFieldLabelSeat">Seat Number</span>:
+          {{selectedSeat}}
+        </p>
         <div *ngIf="onboarding?.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo">
             Your onboarding is completed! It now takes up to two minutes till your PC assigns it's final IP. Refresh this page to test if the assignment is done.
         </div>
@@ -22,48 +39,42 @@
             If you don't like to wait that long, you can open Windows-Commandprompt (Win+R) and type 'ipconfig /renew' this should assign your play-IP immediately.
         </div>
     </div>
-</p-card>
+</app-card>
 
 
-<p-card i18n-subheader header="Onboarding" subheader="please fill out this form" styleClass="p-card-shadow" *ngIf="selectedTable">
-    <div class="field">
-        <span class="p-float-label">
-            {{selectedTable}}
-            <label for="selTable" i18n="@@onboardingFieldLabelTable">Table Number</label>
-        </span>
+<app-card  *ngIf="selectedTable && !onboarding?.participant" class=" max-w-xl mx-auto mt-10 ">
+    <p class="text-2xl text-center">
+        <span i18n="@@onboardingFieldLabelTable">Table Number</span>:
+      {{selectedTable}}
+    </p>
+
+    <div class="text-left mt-4">
+      <label class="block font-medium text-sm" for="selectSeat" i18n="@@onboardingFieldLabelSeat">Seat Number</label>
+      <app-input inputType="number" inputId="selectSeat" [(ngModel)]="selectedSeat" [min]="0"></app-input>
     </div>
 
-    <div class="field">
-        <span class="p-float-label">
-            <p-inputNumber inputId="selSeat" [(ngModel)]="selectedSeat" [min]="0" [showButtons]="false"></p-inputNumber>
-            <label for="selSeat" i18n="@@onboardingFieldLabelSeat">Seat Number</label>
-        </span>
+    <div class="text-left mt-4">
+      <label class="block font-medium text-sm" for="pw" i18n="@@onboardingFieldLabelPw">Seat Password</label>
+      <app-input inputType="text" inputId="pw" [(ngModel)]="selectedPw" (keyup.enter)="sendSeatParameters()"></app-input>
     </div>
 
-    <div class="field">
-        <span class="p-float-label">
-            <input type="text" id="selPw" pInputText [(ngModel)]="selectedPw" (keyup.enter)="sendSeatParameters()">
-            <label for="selPw" i18n="@@onboardingFieldLabelPw">Seat Password</label>
-        </span>
+    <div class="text-right mt-4">
+      <app-button i18n (click)="sendSeatParameters()" [buttonDisabled]="!allSeatParametersGiven">Submit</app-button>
     </div>
+</app-card>
 
-    <ng-template pTemplate="footer">
-        <button pButton type="button" i18n-label label="Submit" (click)="sendSeatParameters()"></button>
-    </ng-template>
-</p-card>
-
-<p-card styleClass="p-card-shadow" *ngIf="onboarding && onboarding.participant">
+<app-card *ngIf="onboarding && onboarding.participant" class="block mb-10">
     <div class="who_display">
-        <div class="who_question">
+        <span class="text-lg">
             <ng-container i18n="@@onboardingWhoQuestion">Are you</ng-container>:
-        </div>
-        <div class="who_name">
+        </span>
+        <span class="text-4xl font-bold">
             {{ onboarding?.participant }}
-        </div>
+        </span>
     </div>
 
-    <ng-template pTemplate="footer">
-        <button pButton type="button" i18n-label label="No" (click)="sendParticipantConfirmation(false)"></button>
-        <button pButton type="button" i18n-label label="Yes" (click)="sendParticipantConfirmation(true)"></button>
-    </ng-template>
-</p-card>
+  <div class="text-right"  *ngIf="!onboarding?.done">
+    <app-button i18n (click)="sendParticipantConfirmation(false)">No</app-button>
+    <app-button i18n (click)="sendParticipantConfirmation(true)">Yes</app-button>
+  </div>
+</app-card>

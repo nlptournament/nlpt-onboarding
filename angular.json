@@ -26,7 +26,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/lan-party-onboarding-system",
+            "outputPath": "dist/nlpt-onboarding",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -39,10 +39,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/primeng/resources/themes/arya-green/theme.css",
-              "node_modules/primeng/resources/primeng.min.css",
-              "node_modules/primeicons/primeicons.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },

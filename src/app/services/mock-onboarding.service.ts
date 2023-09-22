@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { map, Observable, of, OperatorFunction } from 'rxjs';
+import { map, Observable, of, OperatorFunction, throwError } from 'rxjs';
 import { Onboarding } from '../interfaces/onboarding';
 import { OnboardingService } from './onboarding.service';
 
@@ -18,25 +18,30 @@ export class MockOnboardingService extends OnboardingService {
   }
 
   startOnboarding(table: number, seat: number, pw: string): Observable<Onboarding> {
-    return of({})
-      .pipe(
-        this.mockError(2)
-      );
+    console.log('startOnboarding', table, seat, pw);
+    return of({
+      tables: [1],
+      ip: 3,
+      participant: 'CrazyBa2na',
+    });
   }
 
   completeOnboarding(choice: boolean): Observable<Onboarding> {
-    return of({})
-      .pipe(
-        this.mockError(2)
-      );
+    console.log('choice', choice);
+    return of({
+      tables: [1],
+      ip: 3,
+      participant: 'CrazyBa2na',
+      done: true,
+    });
   }
 
-  mockError<T, R>(code: number): OperatorFunction<T, R> {
-    throw new HttpErrorResponse(
+  mockError(code: number) {
+    return throwError(() => {new HttpErrorResponse(
       {
-        error: { error: { code: 2 } },
+        error: {'error': {'code': code, 'desc': 'wrong password'}},
         status: 400,
       },
-    );
+    )});
   }
 }
