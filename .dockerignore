@@ -1,0 +1,9 @@
+.git*
+.editorconfig
+.ngI18nconfig
+.nvmrc
+Dockerfile
+README.md
+node_modules
+dist
+.angular
