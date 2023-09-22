@@ -11,7 +11,7 @@
             <ng-container i18n="@@onboardingIpHeaderUpcoming">Your IP is going to be</ng-container>:
         </div>
         <div class="ip_ip">
-            {{ utils.ip_int_to_str(onboarding?.ip) }}
+            {{ assignedIp }}
         </div>
         <div *ngIf="onboarding?.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo">
             Your onboarding is completed! It now takes up to two minutes till your PC assigns it's final IP. Refresh this page to test if the assignment is done.

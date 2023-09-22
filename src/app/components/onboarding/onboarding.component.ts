@@ -3,8 +3,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Message } from 'primeng/api';
 import { Onboarding } from 'src/app/interfaces/onboarding';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
-import { OnboardingService } from 'src/app/services/onboarding.service';
 import { UtilsService } from 'src/app/services/utils.service';
+import { OnboardingService } from '../../services/onboarding.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -18,11 +18,11 @@ export class OnboardingComponent implements OnInit {
   selectedTable: number | undefined;
   selectedSeat: number | undefined;
   selectedPw: string | undefined;
-  utils: UtilsService = new UtilsService();
 
   constructor(
     private errorHandler: ErrorHandlerService,
-    private onboardingService: OnboardingService
+    private onboardingService: OnboardingService,
+    private utils: UtilsService,
   ) {}
 
   ngOnInit(): void {
@@ -99,4 +99,13 @@ export class OnboardingComponent implements OnInit {
     ];
   }
 
+  get assignedIp(): string {
+    const ip = this.onboarding?.ip;
+
+    if (ip) {
+      return this.utils.ip_int_to_str(ip);
+    } else {
+      return '';
+    }
+  }
 }
