@@ -31,7 +31,6 @@ export class MockOnboardingService extends OnboardingService {
     return of({
       tables: [1],
       ip: 3,
-      participant: 'CrazyBa2na',
       done: true,
     });
   }
