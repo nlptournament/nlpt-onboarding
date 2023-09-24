@@ -24,15 +24,7 @@
         <div class="text-4xl font-bold text-center">
             {{ assignedIp }}
         </div>
-        <p class="text-lg text-center">
-          <span i18n="@@onboardingFieldLabelTable">Table Number</span>:
-          {{selectedTable}}
-        </p>
-        <p class="text-lg text-center" *ngIf="onboarding?.participant">
-          <span i18n="@@onboardingFieldLabelSeat">Seat Number</span>:
-          {{selectedSeat}}
-        </p>
-        <div *ngIf="onboarding?.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo">
+        <div *ngIf="onboarding?.done" class="ip_reloadinfo mt-5" i18n="@@onboardingIpReloadinfo">
             Your onboarding is completed! It now takes up to two minutes till your PC assigns it's final IP. Refresh this page to test if the assignment is done.
         </div>
         <div *ngIf="onboarding?.done" class="ip_reloadinfo" i18n="@@onboardingIpReloadinfo2">
