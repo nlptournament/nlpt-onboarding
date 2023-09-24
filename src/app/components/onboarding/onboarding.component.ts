@@ -46,6 +46,7 @@ export class OnboardingComponent implements OnInit {
   sendSeatParameters() {
     if (this.selectedTable && this.selectedSeat && this.selectedPw) {
       this.errorMsg = [];
+      this.selectedSeat = parseInt(this.selectedSeat);
       this.onboardingService
         .startOnboarding(this.selectedTable, this.selectedSeat, this.selectedPw)
         .subscribe({
