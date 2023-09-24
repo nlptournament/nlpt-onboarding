@@ -7,7 +7,9 @@ import { RealModule } from '../app/real.module';
 export const environment = {
   production: false,
   services: RealModule,
-  apiUrl: 'http://localhost:8000'
+  apiUrl: 'http://localhost:8000',
+  onlineUrl: 'https://nlpt.online/app/login',
+  onlineImageUrl: 'https://nlpt.online/images/loading-logo.webp',
 };
 
 /*

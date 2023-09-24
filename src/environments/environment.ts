@@ -7,7 +7,9 @@ import { MockModule } from '../app/mock.module';
 export const environment = {
   production: false,
   services: MockModule,
-  apiUrl: 'http://localhost:8000'
+  apiUrl: 'http://localhost:8000',
+  onlineUrl: 'http://localhost/app/login',
+  onlineImageUrl: 'http://localhost/images/loading-logo.webp',
 };
 
 /*

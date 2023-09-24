@@ -1,9 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Onboarding } from 'src/app/interfaces/onboarding';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { OnboardingService } from '../../services/onboarding.service';
+import { OnlineService } from '../../services/online.service';
 
 @Component({
   selector: 'app-onboarding',
@@ -19,6 +20,7 @@ export class OnboardingComponent implements OnInit {
   constructor(
     private errorHandler: ErrorHandlerService,
     private onboardingService: OnboardingService,
+    private onlineService: OnlineService,
     private utils: UtilsService,
   ) {}
 
@@ -68,6 +70,9 @@ export class OnboardingComponent implements OnInit {
       .subscribe({
         next: (onboarding: Onboarding) => {
           this.onboarding = onboarding;
+          if (this.onboarding.done === true) {
+            this.goToOnlinePageAfterNetworkIsOnline();
+          }
         },
         error: (err: HttpErrorResponse) => {
           this.onboarding = undefined;
@@ -94,6 +99,17 @@ export class OnboardingComponent implements OnInit {
     this.errorMsg = [
       msg
     ];
+  }
+
+  goToOnlinePageAfterNetworkIsOnline() {
+    this.onlineService.loadOnlinePageUntilItSucceed()
+      .subscribe(
+        online => {
+          if (online) {
+            this.onlineService.redirectToOnlinePage();
+          }
+        }
+      )
   }
 
   get assignedIp(): string {
