@@ -1292,7 +1292,7 @@
       </trans-unit>
       <trans-unit id="onboardingIpReloadinfo" datatype="html">
         <source>Your onboarding is completed! It now takes up to two minutes till your PC assigns it&apos;s final IP. Refresh this page to test if the assignment is done.</source>
-        <target state="signed-off">Onboarding erfolgreich abgeschlossen! Es dauert nun bis zu zwei Minuten bis dein PC sich seine entgültige IP abgeholt hat. Lade diese Seite neu um zu testen ob dieser Prozess abgeschlossen ist.</target>
+        <target state="signed-off">Onboarding erfolgreich abgeschlossen! Es dauert nun bis zu zwei Minuten bis dein PC sich seine entgültige IP abgeholt hat. Sobald dies erledigt ist, lädt sich automatisch unsere Online-Webseite.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/onboarding/onboarding.component.html</context>
           <context context-type="linenumber">16</context>
